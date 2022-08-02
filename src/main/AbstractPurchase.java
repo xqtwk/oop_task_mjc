@@ -4,17 +4,16 @@ abstract class AbstractPurchase implements Comparable{
     protected Product product;
     protected int purchasedUnits;
 
-    public AbstractPurchase() {}
 
     public static void main(String[] args) {
-        Euro euro = new Euro(50,110);
+        Euro euro = new Euro(100);
         Product product = new Product("gg", euro);
-        //AbstractPurchase abstractPurchase = new AbstractPurchase(product, 1){};
-        EveryUnitDiscountedPurchase everyUnitDiscountedPurchase = new EveryUnitDiscountedPurchase(product, 10);
-        System.out.println(everyUnitDiscountedPurchase.toString());
+        GreaterThanConstantDiscountedPurchase greaterThanConstantDiscountedPurchase = new GreaterThanConstantDiscountedPurchase(product, 15);
+        System.out.println(greaterThanConstantDiscountedPurchase.toString());
+        System.out.println(greaterThanConstantDiscountedPurchase.getCost());
     }
 
-    //public AbstractPurchase() {}
+    public AbstractPurchase() {}
 
     public AbstractPurchase(Product product, int purchasedUnits) {
         this.product = product;
@@ -30,7 +29,7 @@ abstract class AbstractPurchase implements Comparable{
     }
 
     public int getCost() {
-        return product.getPrice().getEuro() * purchasedUnits;
+        return product.getPrice().getCents() * purchasedUnits;
     }
 
     @Override
@@ -46,22 +45,49 @@ abstract class AbstractPurchase implements Comparable{
 }
 
 class EveryUnitDiscountedPurchase extends AbstractPurchase {
+
     public EveryUnitDiscountedPurchase(Product product, int purchasedUnits) {
-        super(product, purchasedUnits);
+        this.product = product;
+        this.purchasedUnits = purchasedUnits;
     }
 
     @Override
     public int getCost() {
-            //product.setPrice(new Euro(10,10000));
-        //int result = product.getPrice().getEuro() * 100;
-        return product.getPrice().getEuro() * purchasedUnits*99;
+        // discount for each is 50
+        return (product.getPrice().getCents() - 50) * purchasedUnits;
     }
 }
 
 class GreaterThanConstantDiscountedPurchase extends AbstractPurchase {
+    // discount is 8.795
+    private final double discount = 8.795;
+    private final int exceedQuantity = 15;
+    public GreaterThanConstantDiscountedPurchase(Product product, int purchasedUnits) {
+        this.product = product;
+        this.purchasedUnits = purchasedUnits;
+    }
 
+    @Override
+    public int getCost() {
+        //quantity to exceed is 15
+        if (purchasedUnits > exceedQuantity) {
+            return (int) Math.floor(product.getPrice().getCents() * purchasedUnits * (1 - discount / 100));
+        } else {
+            return product.getPrice().getCents()* purchasedUnits;
+        }
+    }
 }
 
 class AdditionForTransportExpensesPurchase extends AbstractPurchase {
+    // addition is 25
+    private final int addition = 25;
+    public AdditionForTransportExpensesPurchase(Product product, int purchasedUnits) {
+        this.product = product;
+        this.purchasedUnits = purchasedUnits;
+    }
 
+    @Override
+    public int getCost() {
+        return product.getPrice().getCents() * purchasedUnits + addition;
+    }
 }

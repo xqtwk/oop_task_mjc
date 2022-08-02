@@ -1,11 +1,9 @@
 package main;
-
 class Product extends AbstractPurchase{
     private String name;
     private Euro price;
-
     public static void main(String[] args) {
-        Euro euro = new Euro(50, 50);
+        Euro euro = new Euro(50);
         Product product = new Product("mfka", euro);
         System.out.println(product.getPrice());
     }
@@ -35,6 +33,6 @@ class Product extends AbstractPurchase{
     @Override
     public String toString() {
         return "name='" + getName() + '\'' +
-                "; price=" + getPrice().getEuro();
+                "; price=" + getPrice().getCents();
     }
 }
