@@ -1,6 +1,6 @@
 package main;
 
-class Euro {
+class Euro implements Comparable<Euro> {
     private int cents;
 
     public Euro() {}
@@ -15,5 +15,10 @@ class Euro {
 
     public void setCents(int cents) {
         this.cents = cents;
+    }
+
+    @Override
+    public int compareTo(Euro o) {
+        return this.cents - o.cents;
     }
 }
