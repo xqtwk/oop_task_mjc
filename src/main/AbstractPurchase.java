@@ -4,16 +4,6 @@ public abstract class AbstractPurchase implements Comparable<AbstractPurchase>{
     protected Product product;
     protected int purchasedUnits;
 
-
-    public static void main(String[] args) {
-        Euro euro = new Euro(100);
-        Product product = new Product("gg", euro);
-        GreaterThanConstantDiscountedPurchase greaterThanConstantDiscountedPurchase = new GreaterThanConstantDiscountedPurchase(product, 15);
-        System.out.println(greaterThanConstantDiscountedPurchase.toString());
-        System.out.println(greaterThanConstantDiscountedPurchase.getCost());
-        //System.out.println(((Object)greaterThanConstantDiscountedPurchase.getCost()).getClass().getSimpleName());
-    }
-
     public AbstractPurchase() {}
 
     public AbstractPurchase(Product product, int purchasedUnits) {
@@ -36,7 +26,7 @@ public abstract class AbstractPurchase implements Comparable<AbstractPurchase>{
     @Override
     public String toString() {
         return product +
-                "; purchasedUnits=" + purchasedUnits;
+                ";" + purchasedUnits + ";" + this.getCost().getCents();
     }
 
     @Override
