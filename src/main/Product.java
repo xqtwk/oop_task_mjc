@@ -1,9 +1,7 @@
 package main;
-public class Product{
-    private String name;
-    private Euro price;
-
-    public Product() {}
+public class Product {
+    private final String name;
+    private final Euro price;
 
     public Product(String name, Euro price) {
         this.name = name;
@@ -14,21 +12,13 @@ public class Product{
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Euro getPrice() {
         return price;
     }
 
-    public void setPrice(Euro price) {
-        this.price = price;
-    }
-
     @Override
     public String toString() {
-        return getName() + ";" + getPrice().getCents();
+        return getName() + ";" + getPrice();
     }
     @Override
     public boolean equals(Object obj) {

@@ -33,9 +33,6 @@ public class PurchaseArray {
     }
 
     public int search(int value) {
-        /*
-        SOMEWHY DOESN'T WORKS CORRECTLY
-         */
         int[] costs = new int[purchases.length];
         for(int i = 0; i < purchases.length; i++){
             costs[i] = purchases[i].getCost().getCents();

@@ -1,27 +1,26 @@
 package main;
 
 public class GreaterThanConstantDiscountedPurchase extends AbstractPurchase {
-    // discount is 8.795
-    private final double discount = 8.795;
+    private final double discount;
     private final int exceedQuantity = 15;
 
-    public GreaterThanConstantDiscountedPurchase(Product product) {
-        this.product = product;
-    }
-
-    public GreaterThanConstantDiscountedPurchase(Product product, int purchasedUnits) {
+    public GreaterThanConstantDiscountedPurchase(Product product, int purchasedUnits, double discount) {
         super(product, purchasedUnits);
-        this.product = product;
-        this.purchasedUnits = purchasedUnits;
+        this.discount = discount;
     }
 
     @Override
-    public Euro getCost() {
+    public Euro getFinalCost(Euro baseCost) {
         //quantity to exceed is 15
         if (purchasedUnits > exceedQuantity) {
-            return new Euro((int) Math.floor(product.getPrice().getCents() * purchasedUnits * (1 - discount / 100)));
-        } else {
-            return new Euro(product.getPrice().getCents() * purchasedUnits);
+            baseCost = baseCost.mul(1 - discount/100, RoundMethod.ROUND, 0);
         }
+        return baseCost;
+    }
+
+    @Override
+    protected String fieldsToString() {
+        return this.getClass().getSimpleName() + ";" + product.toString() + ";" +  purchasedUnits + ";"
+                + discount;
     }
 }

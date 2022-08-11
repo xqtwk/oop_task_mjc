@@ -1,16 +1,21 @@
 package main;
 
 public class EveryUnitDiscountedPurchase extends AbstractPurchase {
+    private final Euro discount;
 
-    public EveryUnitDiscountedPurchase(Product product, int purchasedUnits) {
+    public EveryUnitDiscountedPurchase(Product product, int purchasedUnits, Euro discount) {
         super(product, purchasedUnits);
-        this.product = product;
-        this.purchasedUnits = purchasedUnits;
+        this.discount = discount;
     }
 
     @Override
-    public Euro getCost() {
-        // discount for each is 50
-        return new Euro((product.getPrice().getCents() - 50) * purchasedUnits);
+    protected Euro getFinalCost(Euro baseCost) {
+        return baseCost.sub(discount.mul(purchasedUnits));
+    }
+
+    @Override
+    protected String fieldsToString() {
+        return this.getClass().getSimpleName() + ";" + product.toString() + ";" +  purchasedUnits + ";"
+                + discount;
     }
 }
