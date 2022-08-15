@@ -15,7 +15,6 @@ public class EveryUnitDiscountedPurchase extends AbstractPurchase {
 
     @Override
     protected String fieldsToString() {
-        return this.getClass().getSimpleName() + ";" + product.toString() + ";" +  purchasedUnits + ";"
-                + discount;
+        return super.fieldsToString() + ";" + discount;
     }
 }

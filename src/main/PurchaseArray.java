@@ -1,8 +1,6 @@
 package main;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 
 public class PurchaseArray {
@@ -13,8 +11,8 @@ public class PurchaseArray {
     }
 
     public void printArr(){
-        for(int i = 0; i < purchases.length; i++) {
-            System.out.println(purchases[i]);
+        for(AbstractPurchase purchase : purchases) {
+            System.out.println(purchase);
         }
     }
     public void printByIndex(int index) {
