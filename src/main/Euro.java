@@ -16,7 +16,7 @@ public class Euro implements Comparable<Euro> {
     }
 
     public int getCents() {
-        return value;
+        return value % 100;
     }
 
     public Euro add(Euro euro){

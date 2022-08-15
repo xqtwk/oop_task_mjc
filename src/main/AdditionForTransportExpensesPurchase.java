@@ -15,7 +15,6 @@ public class AdditionForTransportExpensesPurchase extends AbstractPurchase {
 
     @Override
     protected String fieldsToString() {
-        return this.getClass().getSimpleName() + ";" + product.toString() + ";" +  purchasedUnits + ";"
-                + fee;
+        return super.fieldsToString() + ";" + fee;
     }
 }
