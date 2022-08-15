@@ -23,10 +23,11 @@ public class Runner {
         products.printArr();
         System.out.println(products.getMinimalCost());
         int cost = 33300;
-        if (products.search(cost) < 0) {
+        int index = products.search(cost);
+        if (index < 0) {
             System.out.println("Purchase not found");
         } else {
-            products.printByIndex(products.search(cost));
+            products.printByIndex(index);
         }
     }
 }

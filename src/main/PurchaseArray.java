@@ -29,15 +29,12 @@ public class PurchaseArray {
         // new array, so the original doesn't gets sorted
         AbstractPurchase[] array = purchases.clone();
         Arrays.sort(array);
-        return "Minimum cost = " + array[array.length-1].getCost().getCents();
+        return "Minimum cost = " + array[array.length-1].getCost();
     }
 
     public int search(int value) {
-        int[] costs = new int[purchases.length];
-        for(int i = 0; i < purchases.length; i++){
-            costs[i] = purchases[i].getCost().getCents();
-        }
-        return Arrays.binarySearch(costs, value);
+        return Arrays.binarySearch(purchases,
+                new AdditionForTransportExpensesPurchase(new Product("product", new Euro(value)), 1, new Euro(0)));
     }
 
     @Override

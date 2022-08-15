@@ -20,17 +20,17 @@ public abstract class AbstractPurchase implements Comparable<AbstractPurchase>{
     }
 
     public String toString() {
-        return fieldsToString() + ";" + this.getCost().toString();
+        return fieldsToString() + ";" + getCost();
     }
 
     protected String fieldsToString() {
-        return getClass().getSimpleName() + ";" + product + ";" + purchasedUnits + ";" + this.getCost().toString();
+        return getClass().getSimpleName() + ";" + product + ";" + purchasedUnits;
     }
 
 
     @Override
     public int compareTo(AbstractPurchase o) {
-        return o.getCost().compareTo(this.getCost());
+        return o.getCost().compareTo(getCost());
     }
 
     @Override
@@ -41,7 +41,7 @@ public abstract class AbstractPurchase implements Comparable<AbstractPurchase>{
 
         AbstractPurchase another = (AbstractPurchase) obj;
 
-        return this.product.equals(another.product) && this.purchasedUnits == another.purchasedUnits;
+        return this.product.equals(another.product) && purchasedUnits == another.purchasedUnits;
     }
 }
 
