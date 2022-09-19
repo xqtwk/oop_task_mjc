@@ -1,4 +1,4 @@
-OOP task for moving to phase 1 MJC school
+OOP task for EPAM internship
 
 ```
 Code Exercise
